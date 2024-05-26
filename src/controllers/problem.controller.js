@@ -23,9 +23,16 @@ async function addProblem(req,res,next){
         next(error);
     }
 }
-function getProblem(req,res,next){
+async function getProblem(req,res,next){
     try {
-        throw new NotImplemented('addProblem');
+        // throw new NotImplemented('addProblem');
+        const getProblem=await problemService.getProblem(req.params.id);
+        return res.status(StatusCodes.OK).json({
+            success:true,
+            message:`Successfully find Problem with id-> ${req.params.id} `,
+            error:{},
+            data:getProblem
+        })
     } catch(error) {
         next(error);
     }
