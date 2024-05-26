@@ -3,6 +3,8 @@ const bodyParser = require('body-parser');
 const {PORT}=require('./config/server.config');
 const apiRouter = require('./routes');
 const errorHandler = require('./utils/ErrorHandler');
+const connectToDB = require('./config/db.config');
+const mongoose=require('mongoose')
 // const errorHandler = require('./utils/errorHandler');
 
 
@@ -22,7 +24,13 @@ app.use('/api',apiRouter)
 
 app.use(errorHandler);
 
-app.listen(PORT,(req,res)=>{
+app.listen(PORT,async (req,res)=>{
     console.log(`app is listning on the ${PORT}`);
-    
+    await connectToDB();
+    console.log("successfully connected to db");
+
+    //dummy code to remove
+    // const Cat = mongoose.model('Cat', { name: String });
+    // const kitty = new Cat({ name: 'Zildjian' });
+    // kitty.save().then(() => console.log('meow'));
 })

@@ -1,45 +1,67 @@
 const {StatusCodes}=require('http-status-codes');
 const NotImplemented = require('../errors/notImplemented.error');
+const {ProblemService}=require('../services');
+const {ProblemRepository} = require('../repositories');
+
+const problemService=new ProblemService(new ProblemRepository());
 
 function pingProblemController(req,res){
     return res.json({message:'problem contoller is up'})
 }
 
-function addProblem(req,res,next){
+async function addProblem(req,res,next){
     try {
-        // nothing implemented
-        // throw new BadRequest('Problem Name', {missing: ["Problem Name"]});
+        console.log("incoming req body",req.body)
+       const newProblem=await problemService.createProblem(req.body);
+       return res.status(StatusCodes.CREATED).json({
+        success:true,
+        message:'Successfully Created a new Problem',
+        error:{},
+        data:newProblem
+       })
+    } catch(error) {
+        next(error);
+    }
+}
+async function getProblem(req,res,next){
+    try {
+        // throw new NotImplemented('addProblem');
+        const getProblem=await problemService.getProblem(req.params.id);
+        return res.status(StatusCodes.OK).json({
+            success:true,
+            message:`Successfully find Problem with id-> ${req.params.id} `,
+            error:{},
+            data:getProblem
+        })
+    } catch(error) {
+        next(error);
+    }
+}
+
+async function getProblems(req,res,next){
+    try {
+        // throw new NotImplemented('addProblem');
+        const allProblems=await problemService.getAllProblems();
+        return res.status(StatusCodes.OK).json({
+            success:true,
+            message:'Successfully find all Problems',
+            error:{},
+            data:allProblems
+        })
+    } catch(error) {
+        next(error);
+    }
+}
+
+function deleteProblem(req,res,next){
+    try {
         throw new NotImplemented('addProblem');
     } catch(error) {
         next(error);
     }
 }
 
-function getProblem(req,res){
-    try {
-        throw new NotImplemented('addProblem');
-    } catch(error) {
-        next(error);
-    }
-}
-
-function getProblems(req,res){
-    try {
-        throw new NotImplemented('addProblem');
-    } catch(error) {
-        next(error);
-    }
-}
-
-function deleteProblem(req,res){
-    try {
-        throw new NotImplemented('addProblem');
-    } catch(error) {
-        next(error);
-    }
-}
-
-function updateProblem(req,res){
+function updateProblem(req,res,next){
     try {
         throw new NotImplemented('addProblem');
     } catch(error) {
