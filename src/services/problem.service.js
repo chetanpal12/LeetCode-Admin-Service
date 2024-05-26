@@ -5,7 +5,7 @@ class ProblemService{
         this.problemRepository=problemRepository
     }
                                         // we store business logic in service layer
-                                        
+
     async createProblem(problemData){
         try {
             console.log("problemdata from service",problemData)
@@ -17,6 +17,17 @@ class ProblemService{
             console.log("problem created",problem);
 
             return problem;
+        } catch (error) {
+            console.log(error);
+            throw error;
+        }
+        
+    }
+
+    async getAllProblems(){
+        try {
+            const problems=await this.problemRepository.getAllProblems();
+            return problems;
         } catch (error) {
             console.log(error);
             throw error;

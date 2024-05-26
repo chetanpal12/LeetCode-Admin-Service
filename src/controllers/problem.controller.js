@@ -23,7 +23,6 @@ async function addProblem(req,res,next){
         next(error);
     }
 }
-
 function getProblem(req,res,next){
     try {
         throw new NotImplemented('addProblem');
@@ -32,9 +31,16 @@ function getProblem(req,res,next){
     }
 }
 
-function getProblems(req,res,next){
+async function getProblems(req,res,next){
     try {
-        throw new NotImplemented('addProblem');
+        // throw new NotImplemented('addProblem');
+        const allProblems=await problemService.getAllProblems();
+        return res.status(StatusCodes.OK).json({
+            success:true,
+            message:'Successfully find all Problems',
+            error:{},
+            data:allProblems
+        })
     } catch(error) {
         next(error);
     }
