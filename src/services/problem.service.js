@@ -45,6 +45,31 @@ class ProblemService{
         }
         
     }
+
+    async deleteProblem(problemId){
+        try {
+            const problem=await this.problemRepository.deleteProblem(problemId);
+            return problem;
+        } catch (error) {
+            console.log(error);
+            throw error;
+        }
+        
+    }
+
+    async updateProblem(problemId,dataToUpadate){
+        try {
+            // console.log("data from service for update",dataToUpadate,problemId);
+            if(dataToUpadate.description){
+                dataToUpadate.description=sanitizeMarkdownContent(dataToUpadate.description);
+            }
+            // console.log("data after sanitize",dataToUpadate);
+            const problem=await this.problemRepository.updateProblem(problemId,dataToUpadate);
+            return problem;
+        } catch (error) {
+            throw error;
+        }
+    }
 }
 
 module.exports=ProblemService

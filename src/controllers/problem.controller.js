@@ -1,7 +1,7 @@
 const {StatusCodes}=require('http-status-codes');
-const NotImplemented = require('../errors/notImplemented.error');
 const {ProblemService}=require('../services');
 const {ProblemRepository} = require('../repositories');
+const BadRequest = require('../errors/badrequest.error');
 
 const problemService=new ProblemService(new ProblemRepository());
 
@@ -53,17 +53,34 @@ async function getProblems(req,res,next){
     }
 }
 
-function deleteProblem(req,res,next){
+async function deleteProblem(req,res,next){
     try {
-        throw new NotImplemented('addProblem');
+        // throw new NotImplemented('addProblem');
+        const deleteProblem=await problemService.deleteProblem(req.params.id);
+        return res.status(StatusCodes.OK).json({
+            success:true,
+            message:`Successfully delete Problem with id-> ${req.params.id} `,
+            error:{},
+            data:deleteProblem
+        })
     } catch(error) {
         next(error);
     }
 }
 
-function updateProblem(req,res,next){
+async function updateProblem(req,res,next){
     try {
-        throw new NotImplemented('addProblem');
+        // console.log("data in controller",req.body);
+        if(Object.keys(req.body).length === 0){
+            throw new BadRequest("update","which property to update is missing or not sent by the user")
+        }
+        const updateProblem=await problemService.updateProblem(req.params.id,req.body);
+        return res.status(StatusCodes.OK).json({
+        success:true,
+        message:`Successfully update Problem with id-> ${req.params.id} `,
+        error:{},
+        data:updateProblem
+        })
     } catch(error) {
         next(error);
     }
