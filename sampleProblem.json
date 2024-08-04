@@ -1,0 +1,33 @@
+{
+    "success": true,
+    "message": "Successfully Created a new Problem",
+    "error": {},
+    "data": {
+        "title": "Sample Problem 1",
+        "description": "###hello world\n\nnew problem\n-----------\n\n![Mobile Phone Image](https://imgs.search.brave.com/9RrO5zGL9IMRQklxSLZoTUbPC_2fCYDkSi36wt-Cfs8/rs:fit:500:0:0/g:ce/aHR0cHM6Ly91cGxv/YWQud2lraW1lZGlh/Lm9yZy93aWtpcGVk/aWEvY29tbW9ucy90/aHVtYi9iL2I2L0lt/YWdlX2NyZWF0ZWRf/d2l0aF9hX21vYmls/ZV9waG9uZS5wbmcv/NjQwcHgtSW1hZ2Vf/Y3JlYXRlZF93aXRo/X2FfbW9iaWxlX3Bo/b25lLnBuZw)",
+        "difficulty": "easy",
+        "testCases": [
+            {
+                "input": "3",
+                "output": "9",
+                "_id": "66afc6bb9cf2fb88448b53d6"
+            },
+            {
+                "input": "4",
+                "output": "16",
+                "_id": "66afc6bb9cf2fb88448b53d7"
+            }
+        ],
+        "codeStubs": [
+            {
+                "language": "JAVA",
+                "startSnippet": "//{ Driver Code Starts\n// Initial Template for Java\n\nimport java.io.*;\nimport java.util.*;\n\nclass GFG {\n    public static void main(String[] args) throws IOException {\n        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));\n\n        int t = Integer.parseInt(br.readLine().trim());\n        while (t-- > 0) {\n            int n = Integer.parseInt(br.readLine().trim());\n            String[] str = br.readLine().trim().split(\" \");\n            int[] arr = new int[n - 1];\n            for (int i = 0; i < n - 1; i++) {\n                arr[i] = Integer.parseInt(str[i]);\n            }\n            Solution sln = new Solution();\n            System.out.println(sln.missingNumber(n, arr));\n        }\n    }\n}\n// } Driver Code Ends\n",
+                "endSnippet": "",
+                "userSnippet": "// User function Template for Java\nclass Solution {\n\n    // Note that the size of the array is n-1\n    int missingNumber(int n, int arr[]) {\n\n        // Your Code Here\n    }\n}\n",
+                "_id": "66afc6bb9cf2fb88448b53d8"
+            }
+        ],
+        "_id": "66afc6bb9cf2fb88448b53d5",
+        "__v": 0
+    }
+}
