@@ -5,11 +5,20 @@ const apiRouter = require('./routes');
 const errorHandler = require('./utils/ErrorHandler');
 const connectToDB = require('./config/db.config');
 const mongoose=require('mongoose')
+const cors = require('cors');
 // const errorHandler = require('./utils/errorHandler');
 
 
 const app=express();
 
+const corsOptions = {
+    origin: '*', // Allow only requests from this origin
+    methods: ['GET', 'POST'], // Allow only these HTTP methods
+    // allowedHeaders: ['Content-Type', 'Authorization'], // Allow only these headers
+  };
+  
+  app.use(cors(corsOptions));
+  
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
